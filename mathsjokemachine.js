@@ -59,23 +59,18 @@ function loadSheetsApi() {
  */
 function listMajors() {
   gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms',
-    range: 'Class Data!A2:E', // Tells which rows/columns to grab from the spreadsheet
+    spreadsheetId: '1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg',
+    range: 'Class Data!A:A', // Tells which rows/columns to grab from the spreadsheet
   }).then(function(response) {
     console.log(response)
     var range = response.result;
     if (range.values.length > 0) { // If the values in the result callback is non-empty, then
-      appendPre('Name, Major:');
-      for (i = 0; i < range.values.length; i++) {
-        var row = range.values[i];
-        // For each entry in values array, print columns A and E, which correspond to indices 0 and 4.
-        appendPre(row[0] + ', ' + row[4]);
-      }
+      document.getElementById('jokequote').innerHTML = range.values[Math.floor(Math.random()*range.values.length)];      }
     } else {
-      appendPre('No data found.');
+      document.getElementById('jokequote').innerHTML = 'No data found.';
     }
   }, function(response) {
-    appendPre('Error: ' + response.result.error.message);
+    document.getElementById('jokequote').innerHTML = 'Error: ' + response.result.error.message;
   });
 }
 
