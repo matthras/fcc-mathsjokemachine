@@ -1,3 +1,12 @@
+/* Links
+Joke List Spreadsheet: https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg/edit#gid=0
+
+API: https://console.developers.google.com/apis/credentials?project=plenary-beach-138712
+Quickstart for quickstart.html: https://developers.google.com/sheets/quickstart/js
+API Client Library: https://developers.google.com/api-client-library/javascript/
+APi Reference: https://developers.google.com/sheets/reference/rest/
+*/
+
 var CLIENT_ID = '773297392043-vb3i8okt2fhrl805rmeqe1q5ggjakrt8.apps.googleusercontent.com';
 
 var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
