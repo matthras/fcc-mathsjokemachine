@@ -1,65 +1,82 @@
-/* Links
-Joke List Spreadsheet: https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg/edit#gid=0
+// Client ID and API key from the Developer Console
+var CLIENT_ID = '751459220695-q93iap2b4hbn0j08jv3pb7h1lms4mkel.apps.googleusercontent.com';
 
-API: https://console.developers.google.com/apis/credentials?project=plenary-beach-138712
-Quickstart for quickstart.html: https://developers.google.com/sheets/quickstart/js
-API Client Library: https://developers.google.com/api-client-library/javascript/
-APi Reference: https://developers.google.com/sheets/reference/rest/
-*/
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://sheets.googleapis.com/$discovery/rest?version=v4"];
 
-var CLIENT_ID = '773297392043-vb3i8okt2fhrl805rmeqe1q5ggjakrt8.apps.googleusercontent.com';
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = "https://www.googleapis.com/auth/spreadsheets.readonly";
 
-var SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"];
+var authorizeButton = document.getElementById('authorize-button');
+var signoutButton = document.getElementById('signout-button');
 
 /**
- * Check if current user has authorized this application.
+ *  On load, called to load the auth2 library and API client library.
  */
-function checkAuth() {
-  gapi.auth.authorize(
-    {
-      'client_id': CLIENT_ID,
-      'scope': SCOPES.join(' '),
-      'immediate': true
-    }, handleAuthResult);
+function handleClientLoad() {
+gapi.load('client:auth2', initClient);
 }
 
 /**
- * Handle response from authorization server.
- *
- * @param {Object} authResult Authorization result.
+ *  Initializes the API client library and sets up sign-in state
+ *  listeners.
  */
-function handleAuthResult(authResult) {
-  var authorizeDiv = document.getElementById('authorize-div');
-  if (authResult && !authResult.error) {
-    // Hide auth UI, then load client library.
-    authorizeDiv.style.display = 'none';
-    loadSheetsApi();
-  } else {
-    // Show auth UI, allowing the user to initiate authorization by
-    // clicking authorize button.
-    authorizeDiv.style.display = 'inline';
-  }
+function initClient() {
+gapi.client.init({
+    discoveryDocs: DISCOVERY_DOCS,
+    clientId: CLIENT_ID,
+    scope: SCOPES
+}).then(function () {
+    // Listen for sign-in state changes.
+    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+    // Handle the initial sign-in state.
+    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    authorizeButton.onclick = handleAuthClick;
+    signoutButton.onclick = handleSignoutClick;
+});
 }
 
 /**
- * Initiate auth flow in response to user clicking authorize button.
- *
- * @param {Event} event Button click event.
+ *  Called when the signed in status changes, to update the UI
+ *  appropriately. After a sign-in, the API is called.
+ */
+function updateSigninStatus(isSignedIn) {
+if (isSignedIn) {
+    authorizeButton.style.display = 'none';
+    signoutButton.style.display = 'block';
+    listMajors();
+} else {
+    authorizeButton.style.display = 'block';
+    signoutButton.style.display = 'none';
+}
+}
+
+/**
+ *  Sign in the user upon button click.
  */
 function handleAuthClick(event) {
-  gapi.auth.authorize(
-    {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-    handleAuthResult);
-  return false;
+gapi.auth2.getAuthInstance().signIn();
 }
 
 /**
- * Load Sheets API client library.
+ *  Sign out the user upon button click.
  */
-function loadSheetsApi() {
-  var discoveryUrl =
-      'https://sheets.googleapis.com/$discovery/rest?version=v4';
-  gapi.client.load(discoveryUrl).then(listMajors);
+function handleSignoutClick(event) {
+gapi.auth2.getAuthInstance().signOut();
+}
+
+/**
+ * Append a pre element to the body containing the given message
+ * as its text node. Used to display the results of the API call.
+ *
+ * @param {string} message Text to be placed in pre element.
+ */
+function appendPre(message) {
+var pre = document.getElementById('content');
+var textContent = document.createTextNode(message + '\n');
+pre.appendChild(textContent);
 }
 
 /**
@@ -67,18 +84,22 @@ function loadSheetsApi() {
  * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
  */
 function listMajors() {
-  gapi.client.sheets.spreadsheets.values.get({
+gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: '1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg',
-    range: 'Class Data!A:A', // Tells which rows/columns to grab from the spreadsheet
-  }).then(function(response) {
-    console.log(response)
+    range: 'MathsJokeSheet!A2:B',
+}).then(function(response) {
     var range = response.result;
-    if (range.values.length > 0) { // If the values in the result callback is non-empty, then
-      document.getElementById('jokequote').innerHTML = range.values[Math.floor(Math.random()*range.values.length)];      }
-    } else {
-      document.getElementById('jokequote').innerHTML = 'No data found.';
+    console.log(range);
+    if (range.values.length > 0) {
+    appendPre('Question, Answer:');
+    for (i = 0; i < range.values.length; i++) {
+        var row = range.values[i];
+        appendPre(row[0] + ', ' + row[1]);
     }
-  }, function(response) {
-    document.getElementById('jokequote').innerHTML = 'Error: ' + response.result.error.message;
-  });
+    } else {
+    appendPre('No data found.');
+    }
+}, function(response) {
+    appendPre('Error: ' + response.result.error.message);
+});
 }

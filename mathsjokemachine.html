@@ -1,94 +1,19 @@
+<!DOCTYPE html>
+<html>
 <head>
-<style>
-  #page {
-    background-color: green;
-    background-size: cover;
-  }
-</style>
-<link rel='stylesheet' type='text/css' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.2/underscore-min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-<!-- Google Sheets API Script Auth -->
-<script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+    <link rel="stylesheet" href="mathsjokemachine.css">
 </head>
 <body>
-<div id="page" class='container-fluid'>
-  <div class='container'>
-  <div class='panel panel-success'>
-    <div class='panel-heading text-center'>
-      <h1>Random Maths Joke Machine</h1>
-    </div>
-    <div class='panel-body'>
-      <div class='col-md-8 col-md-offset-2'>
-        <div id='buttonrow' class='row'>
-          <p>Oh dear, you have stumbled across a vault of possibly cringe-inducing, eye-rolling, pretentious jokes involving mathematics of varying levels. If you must, click the button below to unleash the potential horrors within.</p>
-          <p>The creator of this machine takes no responsibility for headaches suffered, groans uttered, and stark moments of silence representative of your disbelief.</p>
-        <button id="jokebutton" class='center-block btn btn-success'>Amuse me!</button>
-        </div>
-        <div id='quoterow' class='row'>
-          <h4 id='jokequote1' class='text-center'></h4>
-          <!-- Entry from varmathjokelist -->
-        </div>
-        <div id='quoteexplanation' class='row'>
-        </div>
-    </div>
-</body>
-<script>
-  $(document).ready(function() {
-    // Dictionary of Maths Jokes
-    var mathjokelist = [
-      ['Three statisticians go out hunting together. After a while they spot a solitary rabbit. <br><br> The first statistician takes aim and overshoots. <br><br> The second aims and undershoots. <br><br>  The third shouts out “We got him!" '],
-      ["Two random variables were talking in a bar. They thought they were being discrete but I heard their chatter continuously."],
-      ["There was a statistician that drowned crossing a river… It was 3 feet deep on average."],
-      ['A physicist, a biologist, and a mathematician are sitting on a bench across from a house. They watch as two people go into the house, and then a little later, three people walk out. <br><br> The physicist says, "The initial measurement was incorrect." <br><br> The biologist says, "They must have reproduced." <br><br> The mathematician says, "If exactly one person enters that house, it will be empty." '],
-       ["Q: Why do they never serve beer at a math party? <br><br> A: Because you can't drink and derive... "],
-   ["Q: Why didn't the quarter roll down the hill with the nickel? <br><br> A: Because it had more cents. "],
-   ["Q: Did you hear about the constipated mathematician? <br><br> A: He worked it out with a pencil. "],
-   ["Q: How many molecules in a bowl of guacamole? <br><br> A: Avacado's Number "],
-   ["Q: What happened to the plant in math class? <br><br> A: It grew square roots. "],
-   ["Q: Why did the chicken cross the mobius strip? <br><br> A: To get to the same side. "],
-   ["Q: How do you make seven an even number? <br><br> A: Take the s out! "],
-   ["Q: Why wasn't the geometry teacher at school? <br><br> A: Because she sprained her angle!! "],
-   ["Q: Why should the number 288 never be mentioned? <br><br> A: It's two gross. "],
-   ["Q: Why couldn't the moebius strip enroll at the school? <br><br> A: They required an orientation. "],
-   ["Q: What does a mathematician do about constipation? <br><br> A: He works it out with a pencil. "],
-   ["Q: Why is a math book always unhappy? <br><br> A: Because it always has lots of problems. "],
-   ["Q: Why don't you do arithmetic in the jungle? <br><br> A: Because if you add 4+4 you get ate! "],
-   ["Q: Why did I divide sin by tan? <br><br> A: Just cos. "],
-   ["Q: Where do math teachers go on vacation? <br><br> A: To Times Square. "],
-   ["Q: What do you call friends who love math? <br><br> A: algebros "],
-   ["Q: What do you call a number that can't keep still? <br><br> A: A roamin' numeral. "],
-   ["Q: Why is 6 afraid of 7? <br><br> A: Because 7 8 9 "],
-   ["Q: What did the mathematician say when he finished his christmas dinner? <br><br> A: root -1/ root 64 (I over 8) "],
-   ["Q: What does the zero say to the the eight? <br><br> A: Nice belt! "],
-   ["Q: Why did the mutually exclusive events break up? <br><br> A: They had nothing in common. "],
-   ["Q: How is an artificial christmas tree like the fourth root of -68? <br><br> A: Neither has real roots. "],
-   ["Q: How do you call a one-sided nudie bar? <br><br> A: A Mobius strip club. "],
-   ["Q: How does a math professor propose to his fiance? <br><br> A: With a polynomial ring! "],
-   ["Q: What do you get if you cross a math teacher with a crab? <br><br> A: Snappy answers. "],
-   ["Q: Why did the two 4's skip lunch? <br><br> A: They already 8 (ate)! "],
-   ["Q: What is the most erotic number? <br><br> A: 2110593! <br><br> Q: Why? <br><br> A: When 2 are 1 and don't pay at10tion, they'll know within 5 weeks whether or not, after 9 months, they'll be 3. "],
-   ["Q: What is a proof? <br><br> A: One-half percent of alcohol. "],
-   ["Q: What do you get if you add two apples and three apples? <br><br> A: A middle school math problem! "],
-   ["Q: What is the difference between a mathematician and a philosopher? <br><br> A: The mathematician only needs paper, pencil, and a trash bin for his work - the philosopher can do without the trash bin. "],
-   ["Q: What is non-orientable and lives in the ocean? <br><br> A: Mobius Dick. "],
-   ["Q: What is the difference between a Ph.D. in mathematics and a large pizza? <br><br> A: A large pizza can feed a family of four "],
-   ["Q: How does a mathematician induce good behavior in her children? <br><br> A: `I've told you n times, I've told you n+1 times...' "],
-   ['Q: What is the world\'s longest song? <br><br> A: "Aleph-nought Bottles of Beer on the Wall." '],
-   ["Q: How do you call the largest accumulation point of poles? <br><br> A: Warsaw! "],
-   ['Q: How do you know when you\'ve reached your Math Professors voice-mail? <br><br> A: The message is "The number you have dialed is imaginary. Please, rotate your phone by 90 degrees and try again..." '],
-   ["Q: What is normed, complete, and yellow? <br><br> A: A Bananach space... "],
-   ["Q: What did 2 say to 4 after 2 beat him in a race? <br><br> A: 2 Fast 4 U! "],
-   ["Q: What did the mathematician's parrot say? <br><br> A: A poly \"no meal\" "],
-   ["Q: Why dont people put the numbers 2,3, and 0 together? <br><br> A: Because they are two turdy. "],
-   ["Q: What did one math book say to the other? <br><br> A: Don't bother me I've got my own problems! "],
-   ["Q: How do you teach a blonde math? <br><br> A: Subtract her clothes, divide her legs, and square root her. "],
-   ["Q: What is the definition of a polar bear? <br><br> A: A rectangular bear after a coordinate transformation. "]
-    ];
-    $('#jokebutton').on("click", function() {
-      $('#jokequote1').html(mathjokelist[Math.floor(Math.random()*mathjokelist.length)][0]);
-    });
+    <button id="authorize-button" style="display: none;">Authorize</button>
+    <button id="signout-button" style="display: none;">Sign Out</button>
 
-  });
-</script>
+    <pre id="content"></pre>
+
+    <script src="mathsjokemachine.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()">
+    </script>
+</body>
+</html>
+
