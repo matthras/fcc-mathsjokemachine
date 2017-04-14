@@ -2,9 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/base-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-min.css">
-    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
     <link rel="stylesheet" href="mathsjokemachine.css">
 </head>
 <body>
@@ -12,11 +10,24 @@
         <div class="pure-u-md-1-8 pure-u-xl-1-5"></div>
         <div class="pure-u-1 pure-u-md-3-4 pure-u-xl-3-5">
             <h1>Random Maths Joke Machine</h1>
-            <p>Oh dear, you have stumbled across a vault of possibly cringe-inducing, eye-rolling, pretentious jokes involving mathematics of varying levels. If you must, click the button below to unleash the potential horrors within.</p>
-            <p>The creator of this machine takes no responsibility for headaches suffered, groans uttered, and stark moments of silence representative of your disbelief.</p>
-            <button>I don't care, gimme a joke!</button>
-            <button>I love this joke, let me tweet it!</button>
-            <button>This joke sucks! Gimme another!</button>
+            <div id="intro">    
+                <p>Oh dear, you have stumbled across a vault of possibly cringe-inducing, eye-rolling, pretentious jokes involving mathematics of varying levels. If you must, click the button below to unleash the potential horrors within.</p>
+                <p>The creator of this machine takes no responsibility for headaches suffered, groans uttered, and stark moments of silence representative of your disbelief.</p>
+                <button>I don't care, gimme a joke!</button>
+            </div>
+            <div id="mathsJoke">
+                <p id="jokeQuestion"></p>
+                <p id="jokeAnswer"></p>
+                <p id="jokeExplanation"></p>
+                <button>I love this joke, let me tweet it!</button> <!-- https://dev.twitter.com/web/tweet-button -->
+                <button>This joke sucks! Gimme another!</button>
+            </div>
+            <div id="externalLinks">
+                <a href="https://github.com/matthras/fcc-mathsjokemachine">View code on Github!</a>
+                <p id="nJokesParagraph">There are currently <span id="nJokes"></span> jokes in this list.</p>
+                <a href="https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg">View the list!</a>
+                <button>Contribute a joke!</button>
+            </div>
         </div>
         <div class="pure-u-md-1-8 pure-u-xl-1-5"></div>
     </div>
@@ -24,7 +35,7 @@
     <button id="signout-button" style="display: none;">Sign Out</button>
 
     <pre id="content"></pre>
-
+    <script src="crossroads.min.js"></script>
     <script src="mathsjokemachine.js"></script>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
