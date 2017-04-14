@@ -1,12 +1,13 @@
 {
-  "name": "maths-joke-machine ",
+  "name": "mathsjokemachine",
   "version": "0.1.0",
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
     "gulp-csso": "^3.0.0",
     "gulp-minify-html": "^1.0.6",
-    "gulp-scss": "^1.4.0",
-    "gulp-scss-lint": "^0.4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.1.2"
   }
 }
