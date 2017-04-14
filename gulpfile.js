@@ -1,16 +1,39 @@
-var gulp = require('gulp');
-var miniHTML = require('gulp-minify-html');
-var gulpscss = require('gulp-scss');
-var gulpscsslint = require('gulp-scss-lint');
-var minifyCSS = require('gulp-csso');
-var uglify = require('gulp-uglify');
+'use strict';
 
-gulp.task('scss', function() {
-    return gulp.src('mathsjokemachine.scss')
-        .pipe(gulpscsslint())
-        .pipe(gulpscss())
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var miniHTML = require('gulp-minify-html');
+var minifyCSS = require('gulp-csso');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
+
+gulp.task('sass', function() {
+    return gulp.src('scss/mathsjokemachine.scss')
+        .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dist/css'))
 });
 
-gulp.task('default', ['scss'])
+gulp.task('html', function() {
+    return gulp.src('mathsjokemachine.html')
+        .pipe(miniHTML())
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('js', function() {
+    return gulp.src('js/*.js')
+        .pipe(concat('mathsjokemachine.js'))
+        .pipe(gulp.dest('dist'))
+        .pipe(rename('mathsjokemachine.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist'));
+})
+
+gulp.task('default', ['sass'])
+
+gulp.task('watch', function() {
+    gulp.watch('scss/mathsjokemachine.scss',['sass']);
+    gulp.watch('js/*.js', ['js']);
+    gulp.watch('mathsjokemachine.html',['html']);
+})
