@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/pure-min.css" integrity="sha384-UQiGfs9ICog+LwheBSRCt1o5cbyKIHbwjWscjemyBMT9YCUMZffs6UqUTd0hObXD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@0.6.2/build/grids-responsive-min.css">
     <link rel="stylesheet" href="mathsjokemachine.css">
 </head>
 <body>
@@ -19,14 +20,14 @@
                 <p id="jokeQuestion"></p>
                 <p id="jokeAnswer"></p>
                 <p id="jokeExplanation"></p>
-                <button>I love this joke, let me tweet it!</button> <!-- https://dev.twitter.com/web/tweet-button -->
-                <button>This joke sucks! Gimme another!</button>
+                <a class="pure-button button-twitter">I love this joke, let me tweet it!</a> <!-- https://dev.twitter.com/web/tweet-button -->
+                <a class="pure-button button-red">This joke sucks! Gimme another!</a>
             </div>
             <div id="externalLinks">
-                <a href="https://github.com/matthras/fcc-mathsjokemachine">View code on Github!</a>
+                <a class="pure-button" href="https://github.com/matthras/fcc-mathsjokemachine" target="_blank">View code on Github!</a>
                 <p id="nJokesParagraph">There are currently <span id="nJokes"></span> jokes in this list.</p>
-                <a href="https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg">View the list!</a>
-                <button>Contribute a joke!</button>
+                <a class="pure-button button-green" href="https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg">View the entire list on Google Sheets</a>
+                <a class="pure-button button-green">Contribute a joke!</a>
             </div>
         </div>
         <div class="pure-u-md-1-8 pure-u-xl-1-5"></div>
@@ -35,8 +36,7 @@
     <button id="signout-button" style="display: none;">Sign Out</button>
 
     <pre id="content"></pre>
-    <script src="crossroads.min.js"></script>
-    <script src="mathsjokemachine.js"></script>
+    <script src="mathsjokemachine.min.js"></script>
     <script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
