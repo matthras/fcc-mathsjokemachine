@@ -12,7 +12,7 @@ gulp.task('sass', function() {
     return gulp.src('scss/mathsjokemachine.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS())
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('dist'))
 });
 
 gulp.task('html', function() {
