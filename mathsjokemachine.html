@@ -14,20 +14,20 @@
             <div id="intro">    
                 <p>Oh dear, you have stumbled across a vault of possibly cringe-inducing, eye-rolling, pretentious jokes involving mathematics of varying levels. If you must, click the button below to unleash the potential horrors within.</p>
                 <p>The creator of this machine takes no responsibility for headaches suffered, groans uttered, and stark moments of silence representative of your disbelief.</p>
-                <button id="initialButton" class="pure-button" onClick="generateJoke();" style="display:none;">I don't care, gimme a joke!</button>
+                <p id="nJokesParagraph">There are currently <span id="nJokes"><i class="fa fa-spinner"></i></span> jokes in this list.</p>
+                <button id="initialButton" class="pure-button button-green" onClick="generateJoke();" style="display:none;">I don't care, gimme a joke!</button>
             </div>
             <div id="mathsJoke">
                 <p id="jokeQuestion"></p>
                 <p id="jokeAnswer"></p>
                 <p id="jokeExplanation"></p>
-                <a class="pure-button button-twitter">I love this joke, let me tweet it!</a> <!-- https://dev.twitter.com/web/tweet-button -->
+                <a class="pure-button button-twitter"><i class="fa fa-twitter"></i> I love this joke, let me tweet it!</a> <!-- https://dev.twitter.com/web/tweet-button -->
                 <a class="pure-button button-red" onClick="generateJoke();">Gimme another joke!</a>
             </div>
             <div id="externalLinks">
-                <p id="nJokesParagraph">There are currently <span id="nJokes"></span> jokes in this list.</p>
-                <a class="pure-button button-green" href="https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg">View the entire list on Google Sheets</a>
-                <a class="pure-button button-green" href="https://docs.google.com/forms/d/1yot3HGptAadDMVQU_UWMmOyuFtsNGYioOCBAH3pmEbI">Contribute a joke!</a>
-                <a class="pure-button" href="https://github.com/matthras/fcc-mathsjokemachine" target="_blank">View code on Github!</a>
+                <a class="pure-button button-green" href="https://docs.google.com/spreadsheets/d/1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg" target="_blank">View the entire list on Google Sheets <i class="fa fa-external-link"></i></a>
+                <a class="pure-button button-purple" href="https://docs.google.com/forms/d/1yot3HGptAadDMVQU_UWMmOyuFtsNGYioOCBAH3pmEbI" target="_blank">Contribute a joke! <i class="fa fa-external-link"></i></a>
+                <a class="pure-button button-black" href="https://github.com/matthras/fcc-mathsjokemachine" target="_blank"><i class="fa fa-github"></i> View code on Github!</a>
             </div>
         </div>
         <div class="pure-u-md-1-8 pure-u-xl-1-5"></div>
