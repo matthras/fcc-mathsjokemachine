@@ -9,7 +9,8 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 
 gulp.task('sass', function() {
-    return gulp.src('scss/mathsjokemachine.scss')
+    return gulp.src('scss/*.scss')
+        .pipe(concat('mathsjokemachine.scss'))
         .pipe(sass().on('error', sass.logError))
         .pipe(minifyCSS())
         .pipe(gulp.dest('dist'))
