@@ -67,7 +67,7 @@ function loadJokesIntoMemory() {
         } else {
             document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
         }
-        document.getElementById('initialButton').style.display = 'block';
+        document.getElementById('initialButton').style.display = 'inline';
     }, function(response) {
         document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
         console.log('Error: ' + response.result.error.message);
