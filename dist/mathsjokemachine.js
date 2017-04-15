@@ -58,17 +58,16 @@ var nJokes;
 function loadJokesIntoMemory() {
     gapi.client.sheets.spreadsheets.values.get({
         spreadsheetId: '1rulgef2EIt_2wLpuPTuLvLgP-ZzEmebRIKOzmMqiKHg',
-        range: 'MathsJokeSheet!A2:B',
+        range: 'MathsJokeList!B2:D',
     }).then(function(res) {
-        console.log(res);
         mathsjokeList = res.result.values;
         nJokes = res.result.values.length;
-        console.log(nJokes);
         if(nJokes > 0){
             document.getElementById('nJokes').innerText=nJokes;
         } else {
             document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
         }
+        document.getElementById('initialButton').style.display = 'block';
     }, function(response) {
         document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
         console.log('Error: ' + response.result.error.message);
@@ -77,6 +76,14 @@ function loadJokesIntoMemory() {
 
 var jokeNumber;
 function generateJoke() {
+    document.getElementById('mathsJoke').style.display = 'block';
+    document.getElementById('initialButton').style.display = 'none';
     jokeNumber = Math.floor(Math.random()*nJokes);
-    document.getElementById('jokeQuestion').innerText=mathsjokeList[jokeNumber][1];
+    document.getElementById('jokeQuestion').innerText=mathsjokeList[jokeNumber][0];
+    if(typeof mathsjokeList[jokeNumber][1] != 'undefined') {
+        document.getElementById('jokeAnswer').innerText=mathsjokeList[jokeNumber][1];
+    }
+    if(typeof mathsjokeList[jokeNumber][2] != 'undefined') {
+        document.getElementById('jokeExplanation').innerText=mathsjokeList[jokeNumber][2];
+    }
 }
