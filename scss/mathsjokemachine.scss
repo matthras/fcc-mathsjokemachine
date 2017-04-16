@@ -1,5 +1,13 @@
 body {
-    background-color: white;
+    background-color: black;
+}
+
+p {
+    margin: 1 0.5em;
+}
+
+h1 {
+    text-align: center;
 }
 
 .pure-button {
@@ -29,12 +37,21 @@ body {
 
 #mathsJoke {
     display: none;
-    padding: 1em 1em;
+    padding: 0em 1em;
     text-align: center;
 }
 
 #jokeQuestion {
     font-weight: bold;
+    font-size: 2em;
+}
+
+#jokeAnswer {
+    font-size: 1.5em;
+}
+
+#jokeExplanation {
+    font-size: 1em;
 }
 
 #externalLinks, 
@@ -58,4 +75,26 @@ body {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
+}
+
+.mainPanel {
+    border: 10px outset gray;
+    padding: 0em 1em;
+    background-color: white;
+    min-height: 20em;
+    position: relative;
+}
+
+#externalLinks {
+    width: 100%;
+    padding-bottom: 1em;
+}
+
+.button100width {
+    width: 100%;
+}
+
+#jokeButtons {
+    padding-top: 1em;
+    padding-bottom: 2em;
 }
