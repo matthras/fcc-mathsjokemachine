@@ -31,8 +31,8 @@ function initClient() {
     After a sign-in, the API is called. */
 function updateSigninStatus(isSignedIn) {
 if (isSignedIn) {
-    authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
+    //authorizeButton.style.display = 'none';
+    //signoutButton.style.display = 'block';
     loadJokesIntoMemory();
     //listMajors();
 } else {
@@ -76,6 +76,7 @@ function loadJokesIntoMemory() {
 
 var jokeNumber;
 function generateJoke() {
+    document.getElementById('intro').style.display = 'none';
     document.getElementById('mathsJoke').style.display = 'block';
     document.getElementById('initialButton').style.display = 'none';
     jokeNumber = Math.floor(Math.random()*nJokes);
