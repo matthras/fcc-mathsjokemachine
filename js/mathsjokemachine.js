@@ -67,6 +67,7 @@ function loadJokesIntoMemory() {
         } else {
             document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
         }
+        // Delays 'generate joke' button until all joke data is loaded, otherwise clicking the button then will generate an error
         document.getElementById('initialButton').style.display = 'inline';
     }, function(response) {
         document.getElementById('nJokesParagraph').innerText="This Maths Joke Machine is currently busted!";
@@ -76,15 +77,32 @@ function loadJokesIntoMemory() {
 
 var jokeNumber;
 function generateJoke() {
+    // Clearing out initial divs
     document.getElementById('intro').style.display = 'none';
     document.getElementById('mathsJoke').style.display = 'block';
     document.getElementById('initialButton').style.display = 'none';
+    // Clearing out cantTweet
+    document.getElementById('cantTweet').style.display = 'none';
     jokeNumber = Math.floor(Math.random()*nJokes);
     document.getElementById('jokeQuestion').innerText=mathsjokeList[jokeNumber][0];
     if(typeof mathsjokeList[jokeNumber][1] != 'undefined') {
         document.getElementById('jokeAnswer').innerText=mathsjokeList[jokeNumber][1];
+    } else {
+        document.getElementById('jokeAnswer').innerText='';
     }
     if(typeof mathsjokeList[jokeNumber][2] != 'undefined') {
         document.getElementById('jokeExplanation').innerText=mathsjokeList[jokeNumber][2];
+    } else {
+        document.getElementById('jokeExplanation').innerText='';
+    }
+}
+
+function tweetJoke() {
+    var jokeString = mathsjokeList[jokeNumber][0] + ' ' + mathsjokeList[jokeNumber][1];
+    if(jokeString.length > 140) {
+        document.getElementById('cantTweet').style.display = 'block';
+    } else {
+        var shareURL = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(jokeString);
+        window.open(shareURL,'_blank');   
     }
 }
