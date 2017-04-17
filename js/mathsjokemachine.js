@@ -91,7 +91,7 @@ function generateJoke() {
         document.getElementById('jokeAnswer').innerText='';
     }
     if(typeof mathsjokeList[jokeNumber][2] != 'undefined') {
-        document.getElementById('jokeExplanation').innerText=mathsjokeList[jokeNumber][2];
+        document.getElementById('jokeExplanationText').innerText=mathsjokeList[jokeNumber][2];
     } else {
         document.getElementById('jokeExplanation').innerText='';
     }
