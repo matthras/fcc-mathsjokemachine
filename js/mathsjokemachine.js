@@ -37,8 +37,6 @@ function generateJoke() {
     // Clearing out cantTweet
     document.getElementById('cantTweet').style.display = 'none';
     jokeNumber = Math.floor(Math.random()*nJokes);
-    console.log(typeof mathsjokeList);
-    console.log(mathsjokeList[jokeNumber]);
     document.getElementById('jokeQuestion').innerText=mathsjokeList[jokeNumber][0];
     if(typeof mathsjokeList[jokeNumber][1] != 'undefined') {
         document.getElementById('jokeAnswer').innerText=mathsjokeList[jokeNumber][1];
